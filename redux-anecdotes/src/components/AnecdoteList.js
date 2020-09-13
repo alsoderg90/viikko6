@@ -8,6 +8,8 @@ const AnecdoteList= (props) => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
     const filter = useSelector(state => state.filter)
+    //console.log(anecdotes)
+    //console.log(anecdotes.map(a => a.content))
     const filteredAnecdotes = anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase()))
 
     const vote = (id, message) => {
