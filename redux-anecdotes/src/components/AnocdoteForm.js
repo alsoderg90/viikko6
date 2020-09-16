@@ -1,22 +1,16 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { addAnecdote } from '../reducers/anecdoteReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
-const AnecdoteForm = () => {
+const AnecdoteForm = (props) => {
     
-    const dispatch = useDispatch()
-    useSelector(state => state.anecdotes)
-
     const create = async (event) => {
         event.preventDefault()
         const content = event.target.text.value
         event.target.text.value = ''
-        dispatch(addAnecdote(content))
-        dispatch(setNotification(`You created "${content}"`))
-        setTimeout(() => {
-          dispatch(setNotification(`` ))
-        }, 3500)
+        props.addAnecdote(content)
+        props.setNotification(`You created "${content}"`,35)
       }
 
     return (
@@ -29,4 +23,21 @@ const AnecdoteForm = () => {
     )
 }
 
-export default AnecdoteForm
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    notification: state.notification
+  }
+}
+
+const mapDispatchToProps = {
+  setNotification,
+  addAnecdote
+  
+}
+
+const connectedAnecdotes = connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(AnecdoteForm)
+export default connectedAnecdotes
