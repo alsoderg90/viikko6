@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from 'react-redux'
 const initialState = ''
 
 const notificationReducer = (state = initialState, action) => {
@@ -9,12 +10,22 @@ const notificationReducer = (state = initialState, action) => {
       }
   }
 
-export const setNotification = (message) => {
+export const setNotification = (message, time) => {
+
   console.log(message, "Moi")
-    return {
+  return dispatch => {
+    dispatch({
+      type: 'NOTIFICATION',
+      message: message
+    })
+    setTimeout(() => {
+      dispatch({
         type: 'NOTIFICATION',
-        message: message
-    }
+        message: ''
+      })
+    },time*100)
+  }
 }
+
 
 export default notificationReducer

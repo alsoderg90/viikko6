@@ -13,14 +13,11 @@ const AnecdoteList= (props) => {
     //console.log(anecdotes.map(a => a.content),"2")
     const filteredAnecdotes = anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase()))
 
-    const vote = (id, message) => {
+    const vote = (anecdote) => {
         //console.log('vote', id)
-        dispatch(voteAnecdote(id))
-        dispatch(setNotification(`You voted "${message}"` ))
-        setTimeout(() => {
-          dispatch(setNotification(`` ))
-        }, 3500)      
-      }
+        dispatch(voteAnecdote(anecdote))
+        dispatch(setNotification(`You voted "${anecdote.content}"`, 35 ))
+    }
 
     return (
         <div>
@@ -31,7 +28,7 @@ const AnecdoteList= (props) => {
               </div>
               <div>
                 has {anecdote.votes}
-                <button onClick={() => vote(anecdote.id, anecdote.content)}>vote</button>
+                <button onClick={() => vote(anecdote)}>vote</button>
               </div>
             </div>
           )}
