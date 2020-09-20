@@ -9,8 +9,8 @@ const AnecdoteForm = (props) => {
         event.preventDefault()
         const content = event.target.text.value
         event.target.text.value = ''
-        props.addAnecdote(content)
-        props.setNotification(`You created "${content}"`,35)
+        this.props.addAnecdote(content)
+        this.props.setNotification(`You created "${content}"`,35)
       }
 
     return (
@@ -23,21 +23,14 @@ const AnecdoteForm = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    anecdotes: state.anecdotes,
-    notification: state.notification
-  }
-}
 
 const mapDispatchToProps = {
   setNotification,
   addAnecdote
-  
 }
 
 const connectedAnecdotes = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
   )(AnecdoteForm)
 export default connectedAnecdotes
