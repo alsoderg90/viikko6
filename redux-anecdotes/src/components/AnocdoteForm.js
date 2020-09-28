@@ -9,8 +9,8 @@ const AnecdoteForm = (props) => {
         event.preventDefault()
         const content = event.target.text.value
         event.target.text.value = ''
-        this.props.addAnecdote(content)
-        this.props.setNotification(`You created "${content}"`,35)
+        props.addAnecdote(content)
+        props.setNotification(`You created "${content}"`,35)
       }
 
     return (
